@@ -1,20 +1,25 @@
---
+---
 title: "Week 3: Use R as GIS"
-output: github_document
+author: Guofeng Cao (guofeng.cao@ttu.edu)
+output: pdf_document
 ---
 
-```{r global_options, results='asis', warning=FALSE}
+```{r global_options, echo=FALSE, results=FALSE, warning=FALSE}
 knitr::opts_chunk$set(fig.width=12, fig.height=8, fig.path='Figs/',  warning=FALSE, message=FALSE)
 ```
 
-```{r load, echo=F, eval=T}
+```{r load, echo=F, eval=T, results=FALSE}
 #rm(list=ls())
 x <- c("sp", "rgdal", "rgeos", "maptools", "classInt", "RColorBrewer", "GISTools", "maps", "raster", 'ggmap')
 #install.packages(x) # warning: this may take a number of minutes
 lapply(x, library, character.only = TRUE) #load the required packages
 ```
 
-# Spatial Objects
+## Basic R cheat sheet
+
+[R cheat sheet](https://www.rstudio.com/wp-content/uploads/2016/10/r-cheat-sheet-3.pdf)
+
+## Spatial objects in R
 
 |       |  Without attributes | With attributes |
 | ----- | ------------------  | --------------  |
@@ -24,24 +29,40 @@ lapply(x, library, character.only = TRUE) #load the required packages
 |Raster |  SpatialGrid      | SpatialGridDataFrame|
 |Raster |  SpatialPixels      | SpatialPixelsDataFrame|
 
+## Commonly used GIS-related packages
+
+- Basic: `sp`
+- Input and output: `rgdal`
+- Mapping: `RColorBrewer`, `classInt`
+- Raster: `raster`
+- Overlay `sp`, `rgeos`
+
+
+## Open a spatial dataset 
+
 ```{r load_library, echo=T, eval=T}
+
+# Open a shapefile
 LubbockBlock<-readShapePoly("Data/LubbockBlockNew.shp") #read polygon shapefile
+# or
+LubbockBlock<-readOGR("./Data", "LubbockBlockNew") #read polygon shapefile
+
 class(LubbockBlock)
+
+# Open a csv file with lat/lon information
 HouseLocation<-read.csv("Data/HouseLatLon.csv") #read GPS data
 class(HouseLocation)
+#Specifiy the coordinates to make it as a spatial dataset
 coordinates(HouseLocation)<-c('Lon', 'Lat')
 class(HouseLocation)
+
+# Open a raster/image 
 cropland<-raster("Data/Lubbock_CDL_2013_USDA.tif")
 class(cropland)
 
+# Get data from online
 tmin <- getData("worldclim", var = "tmin", res = 10)  # this will download 
 class(tmin)
-```
-
-
-```{r load_library1, echo=T, eval=T}
-LubbockBlock<-readOGR("./Data", "LubbockBlockNew") #read polygon shapefile
-class(LubbockBlock)
 ```
 
 
@@ -78,9 +99,11 @@ plot(tmin)
 
 ```{R mapping2, echo=T, eval=T}
 library(RgoogleMaps)
-lubbock=geocode('lubbock')
+#lubbock=geocode('lubbock', output="latlon")
+lubbock=c(33.583794, -101.855836)
 
-newmap <- GetMap(center = c(lubbock$lat, lubbock$lon), zoom = 12, destfile = "newmap.png", maptype = "roadmap") 
+newmap <- GetMap(center = lubbock, zoom = 12, destfile = "newmap.png", maptype = "roadmap") 
+#newmap <- GetMap(center = c(lubbock$lat, lubbock$lon), zoom = 12, destfile = "newmap.png", maptype = "roadmap") 
 
 PlotOnStaticMap(newmap, lat=HouseLocation$Lat, lon=HouseLocation$Lon, col='red')
 lubbock<-SpatialPolygons(LubbockBlock@polygons, proj4string=CRS("+init=EPSG:4326"))
@@ -134,6 +157,10 @@ mapMeuseCl<- plotGoogleMaps(cl,zcol= 'level' ,strokeWeight=1:9, filename= 'myMap
 boudary=readShapePoly('Data/boundary');
 proj4string(boudary) <-CRS("+proj=utm +zone=17 +datum=WGS84 +units=m +no_defs +ellps=WGS84 +towgs84=0,0,0")
 proj4string(boudary)
+
+# EPSG code
+## epsg:3857, web Merator
+## epsg:4326, WGS84
 boudaryProj<-spTransform(boudary, CRS("+init=epsg:3857"))
 proj4string(boudaryProj)
 
@@ -148,8 +175,9 @@ plot(projCropland)
 
 # Spatial analysis with R
 
-```{r load_library1, echo=T, eval=T}
+```{r load_library2, echo=T, eval=F}
 
+library(rgdal)
 #subsetting a spatial dataframe
 LubbockBlock<-readOGR("./Data", "LubbockBlockNew") #read polygon shapefile
 
@@ -258,3 +286,9 @@ extent=drawExtent()
 cropElev <- crop(elevation, extent)
 plot(cropElev)
 ```
+
+## Reading
+
+Chapters 2-4 of Applied Spatial Data Analysis with R
+
+
