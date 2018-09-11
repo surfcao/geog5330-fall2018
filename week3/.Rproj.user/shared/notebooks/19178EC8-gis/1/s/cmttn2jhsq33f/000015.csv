@@ -1,0 +1,1 @@
+"0","legend(""topright"", cex=0.85, c(""Bear in park"", ""Bear not in park"", ""Park boundary""), pch=c(16, 1, NA), lty=c(NA, NA, 1), col=c(""red"", ""grey"", ""green""), bty=""n"")"

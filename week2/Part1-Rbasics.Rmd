@@ -1,6 +1,6 @@
 ---
 title: "Week2: Getting started with R"
-output: github_document
+output: pdf_document
 ---
 
 ```{r global_options, echo=FALSE, results='asis'}

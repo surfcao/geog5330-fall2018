@@ -1,6 +1,6 @@
 ---
-title: "Week 2: Exercise"
-output: github_document
+title: "Week 2: R Markdown basics"
+output: pdf_document
 bibliography: bibliography.bib
 ---
 # R Markdown

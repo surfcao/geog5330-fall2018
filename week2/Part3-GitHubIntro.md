@@ -1,7 +1,7 @@
 ---
 title: 'Geog5330: GitHub Introduction'
 author: "Guofeng Cao modified based on Dr. Thomas Girke's class at UC Riverside"
-output: github_document
+output: beamer_presentation
 ---
 
 # GitHub Introduction
@@ -30,6 +30,19 @@ output: github_document
 + [Install](http://git-scm.com/book/en/Getting-Started-Installing-Git) on Windows, OS X and Linux
 + When using it from RStudio, it needs to find the Git executable
 
+## Git Setup
+
++ Setup username 
+  + `git config --global user.name "John Doe"`
+  + confirm with `git config --global user.name     `
+  
++ Setup username 
+  + `git config --global user.email "john.doe@ttu.edu"`
+  + confirm with `git config --global user.email     `
+  
++ To avoid asksing for credentials everytime (optional)
+  + use SSH version
+  
 ## Git Basics from Command-Line
 
 + Finding help from command-line 
@@ -87,6 +100,8 @@ After editing file(s) in your repos, record a snapshot of the staging area
 + Check files in staging area and press `Commit Button`
 
 + To commit changes to GitHub, press `Push Button`
+
+## Using GitHub from RStudio (Cont'd)
 
 + Shortcuts to automate above routines are [here](https://support.rstudio.com/hc/en-us/articles/200711853-Keyboard-Shortcuts)
 

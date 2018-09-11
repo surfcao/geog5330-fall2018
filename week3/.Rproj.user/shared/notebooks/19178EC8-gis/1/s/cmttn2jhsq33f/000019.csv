@@ -1,0 +1,2 @@
+"0","# plot bear points with separate colors inside and outside of parks"
+"0","points(bears[!inside.park, ], pch=1, col=""gray"")"
