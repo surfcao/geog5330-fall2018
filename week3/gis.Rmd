@@ -40,6 +40,10 @@ lapply(x, library, character.only = TRUE) #load the required packages
 
 ## Open a spatial dataset 
 
+- Open a shapefile: `readShapePoly` or `readOGR`
+- Open a raster: `raster` 
+- Open from a remote data repository: `getData`
+
 ```{r load_library, echo=T, eval=T}
 
 # Open a shapefile
@@ -70,6 +74,11 @@ class(tmin)
 
 ## Basic Mapping
 
+- Display a map: `plog`
+- Color selection: `brewer.pal`, `classIntervals` and `findColours`
+- Legend: `legend`
+- North arrow: `north.arrow`
+
 ```{r mapping, echo=T, eval=T}
 LubbockBlock<-readShapePoly("Data/LubbockBlockNew.shp") #read polygon shapefile
 plot(LubbockBlock,axes=TRUE, col=alpha("gray70", 0.6)) #plot Lubbock block shapefile
@@ -97,6 +106,9 @@ plot(tmin)
 
 ## Mapping with static Google Maps
 
+- Use Google Maps as a base map: `GetMap` from library `RgoogleMaps`
+- Make sure spatial data has right projection information
+
 ```{R mapping2, echo=T, eval=T}
 library(RgoogleMaps)
 #lubbock=geocode('lubbock', output="latlon")
@@ -111,6 +123,9 @@ PlotPolysOnStaticMap(newmap, lubbock, col=alpha('blue', 0.2))
 ```
 
 ## Mapping with dynamic Google Maps
+
+- Use Google Maps as a base map: `plotGoogleMaps` from library `plotGoogleMaps`
+- Make sure spatial data has right projection information
 
 ```{R mapping3, echo=T, eval=F}
 library(plotGoogleMaps)
@@ -150,7 +165,11 @@ mapMeuseCl<- plotGoogleMaps(cl,zcol= 'level' ,strokeWeight=1:9, filename= 'myMap
 
 ## Changing map projections
 
-```{r projection, eval=T }
+- Query or specify projection information: `proj4string()`
+- Change map project of a vector dataset: `spTransform()`
+- Change map project of a raster dataset: `projectRaster()`
+
+```{r projection, echo=T,eval=T }
 
 #project a vector 
 
@@ -174,6 +193,10 @@ plot(projCropland)
 ```
 
 # Spatial analysis with R
+
+## Basic operation
+
+- `crop` or `erase`
 
 ```{r load_library2, echo=T, eval=F}
 
@@ -205,6 +228,8 @@ plot(cropselection)
 
 ```
 ## vector analysis (overlay)
+
+- Overlay: `over()`
 
 ```{r vector, echo=T, eval=T }
 #project a vector 
@@ -256,6 +281,12 @@ writeOGR(bears, ".", "bears-by-park", driver="ESRI Shapefile")
 
 ## Raster analysis
 
+- Raster overlay, raster calculator
+- Slope, aspect: `terrain()`
+- Hill shade: `hillShade()`
+- Contour lines: `contour()`
+- Crop a raster: `crop()`
+
 ```{r raster, eval=T, echo=T}
 
 tmin=getData('worldclim', var='tmin', res=10)
@@ -278,7 +309,7 @@ plot(elevation, col = rainbow(25, alpha = 0.35), add = TRUE)
 contour(elevation)
 ```
 
-```{r raster2, eval=F, echo=T}
+```{r raster2, echo=T, eval=F}
 #crop raster
 plot(hill, col = grey(0:100/100), legend = FALSE, main = "Spain")
 plot(elevation, col = rainbow(25, alpha = 0.35), add = TRUE)
