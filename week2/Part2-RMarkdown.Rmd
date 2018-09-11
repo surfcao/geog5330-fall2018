@@ -212,4 +212,10 @@ the corresponding [R Markdown page](http://rmarkdown.rstudio.com/authoring_bibli
 Also, for general reference management and outputting references in Bibtex format [Paperpile](https://paperpile.com/features) 
 can be very helpful.
 
-#Reference
+
+### More information
+
+Book about how to use R Markdown: [R Markdown: The Definitive Guide](https://bookdown.org/yihui/rmarkdown/)
+
+
+## Reference
