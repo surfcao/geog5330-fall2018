@@ -7,7 +7,7 @@ bibliography: bibliography.bib
 
 ## Overview
 
-R Markdown test combines markdown (an easy to write plain text format) with embedded
+R Markdown combines markdown (an easy to write plain text format) with embedded
 R code chunks. When compiling R Markdown documents, the code components can be
 evaluated so that both the code and its output can be included in the final
 document. This makes analysis reports highly reproducible by allowing to automatically
