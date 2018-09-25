@@ -5,7 +5,7 @@ output: pdf_document
 
 ```{r global_options, eval=T, echo=F,results='hide', error=F, warning=FALSE, message=FALSE}
 
-knitr::opts_chunk$set(fig.width=6, fig.height=4, fig.path='Figs/',  eval=F, echo=F, warning=FALSE, message=FALSE, results='hide')
+knitr::opts_chunk$set(fig.width=6, fig.height=4, fig.path='Figs/',  eval=T, echo=T, warning=FALSE, message=FALSE, results='hide')
 rm(list=ls())
 library(sp)
 library(maptools)
