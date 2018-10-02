@@ -1,0 +1,10 @@
+"0","# Generate a set of unconditional simulation based on the specified variogram"
+"0","xy <- expand.grid(1:100, 1:100)"
+"0","names(xy) <- c('x','y')"
+"0","g.dummy <- gstat(formula=z~1, locations=~x+y, dummy=T, beta=1, model=vgm(psill=0.025, range=10, model='Gau', nugget=0.0001), nmax=21) "
+"0","yy <- predict(g.dummy, newdata=xy, nsim=4)"
+"1","[using unconditional Gaussian simulation]
+"
+"0","coordinates(yy)=~x+y"
+"0","gridded(yy) =TRUE"
+"0","spplot(yy)"

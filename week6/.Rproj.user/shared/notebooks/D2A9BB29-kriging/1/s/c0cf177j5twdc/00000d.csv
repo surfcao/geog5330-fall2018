@@ -1,0 +1,4 @@
+"0","lznr.kriged = krige(log(zinc)~sqrt(dist), meuse, meuse.grid, model = lzn.fit)
+"
+"1","[using universal kriging]
+"

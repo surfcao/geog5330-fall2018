@@ -1,0 +1,5 @@
+"0","abline(lm(log(validation$zinc)~lzn.kriged.training$var1.pred))
+"
+"2","Error in int_abline(a = a, b = b, h = h, v = v, untf = untf, ...) : 
+  plot.new has not been called yet
+"
