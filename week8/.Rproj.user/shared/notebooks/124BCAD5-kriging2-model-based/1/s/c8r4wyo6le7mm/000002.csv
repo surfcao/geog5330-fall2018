@@ -1,0 +1,5 @@
+"0","#box-plot of the cloud"
+"0","bin1 <- variog(meuse, breaks=seq(45, 2000, by = 100), estimation.type='classical',bin.cloud=T, max.distance=2000) "
+"1","variog: computing omnidirectional variogram
+"
+"0","plot(bin1, bin.cloud=T)"

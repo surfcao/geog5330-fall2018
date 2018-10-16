@@ -1,0 +1,2 @@
+"0","knitr::opts_chunk$set(fig.width=12, fig.height=8, fig.path='Figs/',  warning=FALSE, message=FALSE)"
+"0","rm(list=ls())"

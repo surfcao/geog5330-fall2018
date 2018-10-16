@@ -1,0 +1,12 @@
+"0","data(meuse.grid)"
+"0","predSites=cbind(meuse.grid$x, meuse.grid$y)"
+"0","OKpred=krige.conv(meuse, locations=predSites, krige=krige.control(type.krige='ok', obj.m=ml))"
+"1","krige.conv: model with constant mean"
+"1","
+"
+"1","krige.conv: Kriging performed using global neighbourhood 
+"
+"0","OKresult=as.data.frame(cbind(OKpred$predict, OKpred$krige.var))"
+"0","coordinates(OKresult)=predSites"
+"0","gridded(OKresult)=TRUE"
+"0","plot(OKresult)"

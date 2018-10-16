@@ -1,0 +1,6 @@
+"0","#variogram fitting"
+"0","##by eye"
+"0","variogram <- variog(meuse, breaks=seq(45, 4000, by = 100))"
+"1","variog: computing omnidirectional variogram
+"
+"0","plot(variogram)"

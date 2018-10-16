@@ -1,0 +1,12 @@
+"0","RKpred=krige.conv(meuse, locations=predSites, krige=krige.control(type.krige='ok', obj.m=ml, trend.d=~dist, trend.l= ~meuse.grid$dist)) "
+"1","krige.conv: model with constant mean"
+"1","
+"
+"1","krige.conv: Kriging performed using global neighbourhood 
+"
+"0","RKresult=as.data.frame(cbind(RKpred$predict, RKpred$krige.var))"
+"0","coordinates(RKresult)=predSites"
+"0","gridded(RKresult)=TRUE"
+"0","p5=spplot ( RKresult, ""V1"")"
+"0","p6=spplot(RKresult,""V2"")"
+"0","print(p5, position = c(0,.5,.5,1),more=T)"

@@ -1,0 +1,9 @@
+"0","#Use Cressies weights:"
+"0","fit2 <- variofit(variogram, cov.model=""sph"", weights=""cressie"", ini.cov.pars=c(0.4,1000), fix.nugget=FALSE, nugget=0.1) "
+"1","variofit: covariance model used is spherical 
+"
+"1","variofit: weights used: cressie 
+"
+"1","variofit: minimisation function used: optim 
+"
+"0","lines(fit2, lty=1, col=""green"")"

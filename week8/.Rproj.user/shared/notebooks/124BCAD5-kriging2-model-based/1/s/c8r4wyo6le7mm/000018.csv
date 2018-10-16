@@ -1,0 +1,3 @@
+"0","# profile likelihood"
+"0","#prof <- proflik(ml, geodata = meuse, sill.val = seq(0.20, 1, l = 5), range.val = seq(800, 1200, l = 6), uni.only = FALSE )"
+"0","#plot(prof)"

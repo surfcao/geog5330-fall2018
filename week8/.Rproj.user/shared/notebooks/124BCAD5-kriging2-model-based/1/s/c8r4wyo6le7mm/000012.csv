@@ -1,0 +1,19 @@
+"0","# "
+"0","env.mc <- variog.mc.env(meuse, obj.var=variogram)"
+"1","variog.env: generating 99 simulations by permutating data values
+"
+"1","variog.env: computing the empirical variogram for the 99 simulations
+"
+"1","variog.env: computing the envelops
+"
+"0","env.model <- variog.model.env(meuse, obj.var=variogram, model=fit2)"
+"2","the condition has length > 1 and only the first element will be used"
+"1","variog.env: generating 99 simulations (with  155 points each) using the function grf
+"
+"1","variog.env: adding the mean or trend
+"
+"1","variog.env: computing the empirical variogram for the 99 simulations
+"
+"1","variog.env: computing the envelops
+"
+"0","par(mfrow=c(1,2))"

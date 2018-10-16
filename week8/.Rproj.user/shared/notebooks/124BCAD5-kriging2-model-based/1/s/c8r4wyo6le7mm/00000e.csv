@@ -1,0 +1,25 @@
+"0","#MML:"
+"0","ml <- likfit(meuse, cov.model=""sph"", ini.cov.pars=c(0.4,1000), fix.nugget=FALSE, nugget=0.1) "
+"1","kappa not used for the spherical correlation function
+"
+"1","---------------------------------------------------------------
+"
+"1","likfit: likelihood maximisation using the function "
+"1","optim.
+"
+"1","likfit: Use control() to pass additional
+         arguments for the maximisation function."
+"1","
+        For further details see documentation for "
+"1","optim.
+"
+"1","likfit: It is highly advisable to run this function several
+        times with different initial values for the parameters.
+"
+"1","likfit: WARNING: This step can be time demanding!
+"
+"1","---------------------------------------------------------------
+"
+"1","likfit: end of numerical maximisation.
+"
+"0","lines(ml, col=""blue"")"
