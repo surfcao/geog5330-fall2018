@@ -1,6 +1,7 @@
 
 ---
 title: "Week 9: Statistical analysis of areal data"
+author: Guofeng Cao (guofeng.cao@ttu.edu)
 output: github_document
 ---
 
@@ -15,6 +16,8 @@ library(RColorBrewer)
 ```
 
 # Areal Data and Spatial Autocorrelation
+
+## Building weight matrix 
 
 ```{r area1, eval=T, echo=T}
 
@@ -89,6 +92,12 @@ summary(sapply(Sy0_lw_idwB$weights, sum))
 
 NY_nb <- read.gal("Data/NY_nb.gal", region.id=row.names(NY8))
 
+```
+
+## Lag variable and Moran's I
+
+```{r area2, eval=T, echo=T}
+
 # Using Weights to Simulate Spatial Autocorrelation
 
 set.seed(987654)
@@ -145,6 +154,11 @@ plot(NY8, col=brewer.pal(4, "Accent")[cols])
 legend("topright", legend=c("None", "HL", "LH", "HH"), fill=brewer.pal(4, "Accent"), bty="n", cex=0.8, y.intersp=0.8)
 title("Tracts with influence")
 par(oopar)
+```
+
+## Local Moran's I
+
+```{r area3, eval=T, echo=T}
 
 ## Local test
 
@@ -174,4 +188,3 @@ spplot(NY8, c("Standard"), at=c(-2.5,-1.4,-0.6,-0.2,0,0.2,0.6,4,7))
 
 
 
-```
