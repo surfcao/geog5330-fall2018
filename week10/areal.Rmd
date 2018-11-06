@@ -29,8 +29,7 @@ $$e_i=\sum_{i=1}^{m} b_{ij}e_i+\epsilon_i$$
 
 where $\epsilon_i \sim N(0, \sigma_i^2)$
 
-or in matrix form $e = Be+\epsilon \rightarrow e=(1-B)^{-1}\epsilon$, which essentially is a moving average process. 
-This leads to $$e_1, e_2, \ldots, e_n \sim N(0, (I-B)^{-1}D((I-B)^{-1})^T) $$
+or $$e_1, e_2, \ldots, e_n \sim N(0, (I-B)^{-1}D((I-B)^{-1})^T) $$
 
 If denote $e_i=Y-X^T\beta$, then the SAR model could be expressed as:
 
@@ -39,7 +38,7 @@ $Y-X^T\beta = B(Y-X^T\beta)+\epsilon$ or $(I-B)(Y-X^T\beta)=\epsilon$
 
 where $B$ is a matrix that contains the dependence parameters $b_{ij}$ and $I$
 is the identity matrix of the required dimension. It is important to point out
-that in order for this SAR model to be well defined, the matrix $I - B$ must be
+that in order for this SAR model to be well defined, the matrix $I-B$ must be
 non-singular. 
 
 A common practice to specify $B$ is $B=\rho W$, where $W$ is the spatial weight
@@ -93,7 +92,6 @@ text(bbox(NY8)[1,1], bbox(NY8)[2,2], labels="b)", cex=0.8)
 nylm <- lm(Z~PEXPOSURE+PCTAGE65P+PCTOWNHOME, data=NY8)
 summary(nylm)
 NY8$lmresid <- residuals(nylm)
-
 NY_nb <- read.gal("Data/NY_nb.gal", region.id=row.names(NY8))
 NYlistw<-nb2listw(NY_nb, style = "B")
 
@@ -101,7 +99,7 @@ NYlistw<-nb2listw(NY_nb, style = "B")
 lm.morantest(nylm, NYlistw)
 
 
-# Spatial conditional and simultaneous autoregression, SAR will be used as default
+# Spatial conditional and simultaneous autoregression 
 
 nysar<-spautolm(Z~PEXPOSURE+PCTAGE65P+PCTOWNHOME, data=NY8, listw=NYlistw)
 
@@ -159,8 +157,41 @@ nycar<-spautolm(Z~PEXPOSURE+PCTAGE65P+PCTOWNHOME , data=NY8, family="CAR",
    listw=NYlistw)
 summary(nycar)
 
+
+
 nycarw<-spautolm(Z~PEXPOSURE+PCTAGE65P+PCTOWNHOME, data=NY8, family="CAR",
    listw=NYlistw, weights=POP8)
 summary(nycarw)
+
+```
+
+## Geographically Weighted Regression
+
+Works well for non-stationary cases:
+
+$$Y_i = \beta_0(i) + \beta_1(i)x_{1} + \ldots + \beta_p(i)x_{p} $$
+with the estimator:
+
+$\beta(i)=(X^TW(i)X)^{-1}X^TW(i)Y$, where $W(i)$ is a matrix of weights spefici to $i$-th location such that observations nearer to this location are given greater weight nearer to $i$ are given greater weight than observations further away. Typically, $W$ can be otained from a weighting (or kernel) function. 
+
+
+```{r gwr, eval=T, echo=T}
+
+library(spgwr)
+
+bwG <- gwr.sel(Z ~ PEXPOSURE + PCTAGE65P + PCTOWNHOME, data = NY8, gweight = gwr.Gauss, verbose = FALSE)
+
+gwrG <- gwr(Z ~ PEXPOSURE + PCTAGE65P + PCTOWNHOME, data = NY8, bandwidth = bwG, gweight = gwr.Gauss, hatmatrix = TRUE)
+
+# Applied to GLM (generalized linear model) case
+
+gbwG <- ggwr.sel(Cases~PEXPOSURE+PCTAGE65P+PCTOWNHOME+offset(log(POP8)), data=NY8, family="poisson", gweight=gwr.Gauss, verbose=FALSE)
+
+ggwrG <- ggwr(Cases~PEXPOSURE+PCTAGE65P+PCTOWNHOME+offset(log(POP8)), data=NY8, family="poisson", bandwidth=gbwG, gweight=gwr.Gauss)
+
+# GWR local coefficient estimates for the exposure to TCE site covariate
+
+TCEpts <- list("sp.points", TCE, pch=16, col="grey5")
+spplot(ggwrG$SDF, "PEXPOSURE", sp.layout=list(TCEpts), col.regions=grey.colors(7, 0.95, 0.55, 2.2), cuts=6)
 
 ```
