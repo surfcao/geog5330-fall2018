@@ -1,6 +1,6 @@
 
 ---
-title: "Week 12: Raster data analysis"
+title: "Week 11: Raster data analysis"
 output: github_document
 ---
 
@@ -48,7 +48,6 @@ gewataCrop <- crop(gewata, e)
 
 writeRaster(x=gewataCrop, filename='sub.tif')
 
-# raster calculator
 # E.g., NDVI=(NIR-R)/(NIR+R)
 
 ndvi <- (gewata[[4]] - gewata[[3]]) / (gewata[[4]] + gewata[[3]])
